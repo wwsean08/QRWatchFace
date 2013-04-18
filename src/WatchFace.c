@@ -76,13 +76,17 @@ void display_layer_update_callback(Layer *me, GContext* ctx) {
 		strcat(codeIn, "Oct ");
 	else if(month == 11)
 		strcat(codeIn, "Nov ");
-	else if(month == 12)
+	else
 		strcat(codeIn, "Dec ");
 	strcat(codeIn, day);
 	strcat(codeIn, "\0");
 	//Generate the QR code
 	unsigned char qr_return_data[];
-	int width = EncodeData(QR_LEVEL_L, QR_VERSION_S, codeIn, 0, qr_return_data);
+	int width = EncodeData(QR_LEVEL_L /** Level Low **/,
+			QR_VERSION_S /** Small Version (version 0-9) **/,
+			codeIn /** Input text **/,
+			0 /** Let it determine the length by null termination **/,
+			qr_return_data /** Return data character array **/);
 	for(int i=0; i<width; i++){
 		for(int j=0; j<width; j++){
 			int bit = (width*i)+j;
