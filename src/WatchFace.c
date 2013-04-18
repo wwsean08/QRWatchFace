@@ -1,7 +1,7 @@
 #include "pebble_os.h"
 #include "pebble_app.h"
 #include "QR_Encode.h"
-#include "test.h"
+#include "WatchFace.h"
 
 void handle_init(AppContextRef ctx) {
 	(void)ctx;
@@ -80,11 +80,22 @@ void display_layer_update_callback(Layer *me, GContext* ctx) {
 		strcat(codeIn, "Dec ");
 	strcat(codeIn, day);
 	strcat(codeIn, "\0");
+	//Generate the QR code
+	unsigned char qr_return_data[];
+	int width = EncodeData(QR_LEVEL_L, QR_VERSION_S, codeIn, 0, qr_return_data);
+	for(int i=0; i<width; i++){
+		for(int j=0; j<width; j++){
+			int bit = (width*i)+j;
+			int value = qr_return_data[bit];
+			//TODO: Draw the pixel to the screen here based on the value, white for 0, black for 1
+			//based on the QR_Encode documentation
+		}
+	}
 }
 
 void handle_minute_tick(AppContextRef ctx, PebbleTickEvent *t) {
 	(void)t;
-	(void)ctx; // TODO: Pass tick event/PblTime rather than make layer use `get_time()`?
+	(void)ctx;
 
 	layer_mark_dirty(&display_layer);
 }
