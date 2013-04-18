@@ -91,8 +91,14 @@ void display_layer_update_callback(Layer *me, GContext* ctx) {
 		for(int j=0; j<width; j++){
 			int bit = (width*i)+j;
 			int value = qr_return_data[bit];
-			//TODO: Draw the pixel to the screen here based on the value, white for 0, black for 1
-			//based on the QR_Encode documentation
+
+			//should draw the pixels to the screen
+			GPoint* point = {j, i};
+			if(value == 0)
+				graphics_context_set_fill_color(ctx, GColorWhite);
+			else
+				graphics_context_set_fill_color(ctx, GColorBlack);
+			graphics_draw_pixel(GContext *ctx, GPoint point);
 		}
 	}
 }
