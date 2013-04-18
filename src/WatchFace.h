@@ -16,3 +16,4 @@ void display_layer_update_callback(Layer *me, GContext* ctx);
 void handle_minute_tick(AppContextRef ctx, PebbleTickEvent *t) ;
 void handle_init(AppContextRef ctx) ;
 void pbl_main(void *params);
+char* int_to_str(int num, char* outbuf);
