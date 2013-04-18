@@ -1,1 +1,3 @@
 This is a watchface I am currently working on for the pebble smartwatch to give it a qr code based watchface which will include both the date and the time.  This was a request on the pebble forums so I decided to take the task of creating it.
+
+I am using the QR Code library created by swex here, https://github.com/swex/QR-Image-embedded (with some minor modifications to make it work on the pebble, which have yet to be done)
